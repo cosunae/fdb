@@ -85,7 +85,7 @@ public:  // methods
     ~APIAggregateIterator() override {}
 
     bool next(ValueType& elem) override {
-
+        std::cout << "In the API iterator " << std::endl;
         while (!iterators_.empty()) {
             if (iterators_.front().next(elem)) {
                 return true;

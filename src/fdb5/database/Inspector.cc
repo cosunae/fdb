@@ -39,6 +39,7 @@ void InspectIterator::emplace(ListElement&& elem) {
 }
 
 bool InspectIterator::next(ListElement& elem) {
+    std::cout << "In the inspector" << std::endl;
     if (index_ >= queue_.size())
         return false;
     elem = queue_[index_];
