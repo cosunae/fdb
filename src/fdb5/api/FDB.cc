@@ -72,9 +72,12 @@ void FDB::archive(eckit::DataHandle& handle) {
     std::cout << "In archive2" << std::endl;
 
     eckit::message::Message msg;
-    eckit::message::Reader reader(handle);
+    std::cout << "before reader" << std::endl;
 
+    eckit::message::Reader reader(handle);
+    std::cout << "after reader" << std::endl;
     while ((msg = reader.next())) {
+        std::cout << "dep archive" << std::endl;
         archive(msg);
     }
 }
