@@ -93,10 +93,11 @@ void FDB::archive(const metkit::mars::MarsRequest& request, eckit::DataHandle& h
 
     eckit::message::Message msg;
     eckit::message::Reader reader(handle);
-
+    std::cout << "tt1" << std::endl;
     metkit::hypercube::HyperCube cube(request);
-
+    std::cout << "tt2" << std::endl;
     while ((msg = reader.next())) {
+        std::cout << "inside" << std::endl;
         fdb5::Key key = MessageDecoder::messageToKey(msg);
         if (!cube.clear(key.request())) {
             std::stringstream ss;
@@ -108,6 +109,7 @@ void FDB::archive(const metkit::mars::MarsRequest& request, eckit::DataHandle& h
         }
         archive(key, msg.data(), msg.length());
     }
+    std::cout << "outside" << std::endl;
     if (cube.countVacant()) {
         std::stringstream ss;
         ss << "FDB archive - missing " << cube.countVacant() << " messages" << std::endl;
