@@ -420,7 +420,7 @@ int fdb_archive_multiple(fdb_handle_t* fdb, fdb_request_t* req, const char* data
     return wrapApiFunction([fdb, req, data, length] {
         ASSERT(fdb);
         ASSERT(data);
-
+        printf("IN fdb_archive_multiple");
         eckit::MemoryHandle handle(data, length);
         if (req) {
             fdb->archive(req->request(), handle);

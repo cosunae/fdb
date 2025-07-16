@@ -64,10 +64,13 @@ FDB::FDB(FDB&&) = default;
 FDB& FDB::operator=(FDB&&) = default;
 
 void FDB::archive(eckit::message::Message msg) {
+    std::cout << "In archive1" << std::endl;
     fdb5::Key key = MessageDecoder::messageToKey(msg);
     archive(key, msg.data(), msg.length());
 }
 void FDB::archive(eckit::DataHandle& handle) {
+    std::cout << "In archive2" << std::endl;
+
     eckit::message::Message msg;
     eckit::message::Reader reader(handle);
 
@@ -76,11 +79,15 @@ void FDB::archive(eckit::DataHandle& handle) {
     }
 }
 void FDB::archive(const void* data, size_t length) {
+    std::cout << "In archive3" << std::endl;
+
     eckit::MemoryHandle handle(data, length);
     archive(handle);
 }
 
 void FDB::archive(const metkit::mars::MarsRequest& request, eckit::DataHandle& handle) {
+    std::cout << "In archive4" << std::endl;
+
     eckit::message::Message msg;
     eckit::message::Reader reader(handle);
 
@@ -112,6 +119,8 @@ void FDB::archive(const metkit::mars::MarsRequest& request, eckit::DataHandle& h
 }
 
 void FDB::archive(const Key& key, const void* data, size_t length) {
+    std::cout << "In archive5" << std::endl;
+
     eckit::Timer timer;
     timer.start();
 
